@@ -12,10 +12,17 @@ def new_book(request):
     Book.objects.create(title = request.POST['title'], desc = request.POST['desc'])
     return redirect('/')
 
-def view_book(request, book_id):
+# def view_book(request, book_id):          #basic level
+#     context = {
+#         "this_book": Book.objects.get(id = book_id),
+#         "all_the_authors": Author.objects.all()
+#     }
+#     return render(request, "view_book.html", context)
+
+def view_book(request, book_id):            #sensei level
     context = {
         "this_book": Book.objects.get(id = book_id),
-        "all_the_authors": Author.objects.all()
+        "all_the_authors": Author.objects.exclude(books = book_id)
     }
     return render(request, "view_book.html", context)
 
@@ -36,12 +43,21 @@ def new_author(request):
     Author.objects.create(first_name = request.POST['first_name'], last_name = request.POST['last_name'], notes = request.POST['notes'])
     return redirect('/authors')
 
-def view_author(request, author_id):
+# def view_author(request, author_id):      #basic level
+#     context = {
+#         "this_author": Author.objects.get(id = author_id),
+#         "all_the_books": Book.objects.all()
+#     }
+#     return render(request, "view_author.html", context)
+
+def view_author(request, author_id):        #sensei level
     context = {
         "this_author": Author.objects.get(id = author_id),
-        "all_the_books": Book.objects.all()
+        "all_the_books": Book.objects.exclude(authors = author_id)
     }
     return render(request, "view_author.html", context)
+
+
 
 def add_book(request):
     book_to_add = Book.objects.get(id = request.POST['book_id'])
