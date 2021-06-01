@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {% load static %}
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/authors.css' %}">
         <!-- <link rel="stylesheet" href="../static/css/style.css" -->
     </head>
     <body>
@@ -18,7 +18,7 @@
                 {% csrf_token %}
                     <p>First Name: <input id="fn_input" name = "first_name" type="text" required></p>
                     <p>Last Name: <input id="ln_input" name = "last_name" type="text" required></p>
-                    <p>Notes: <textarea name = "notes" required></textarea></p>
+                    <p>Notes: <textarea id="notes" name = "notes" required></textarea></p>
                     <button type="submit">Add</button>
                 </form>
             </div> <!--end form-->
