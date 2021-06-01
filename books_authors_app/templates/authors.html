@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Books/Authors With Templates</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <!-- <link rel="stylesheet" href="../static/css/style.css" -->
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="form">
+                <h2>Add an Author</h2>
+                <form action="/new_author" method="POST">
+                {% csrf_token %}
+                    <p>First Name: <input id="fn_input" name = "first_name" type="text" required></p>
+                    <p>Last Name: <input id="ln_input" name = "last_name" type="text" required></p>
+                    <p>Notes: <textarea name = "notes" required></textarea></p>
+                    <button type="submit">Add</button>
+                </form>
+            </div> <!--end form-->
+            <div id="table">
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for author in all_the_authors %}
+                        <tr>
+                            <td>{{author.id}}</td>
+                            <td>{{author.first_name}} {{author.last_name}}</td>
+                            <td><a href= "/authors/{{author.id}}">View</a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>  <!--end table-->
+        </div> <!--end wrapper-->
+    </body>
+</html>
